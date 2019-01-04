@@ -11,7 +11,7 @@ import Foundation
 class DecodeJson {
     
     var cats: Cats?
-    let shared = DecodeJson()
+    static let shared = DecodeJson()
     
     func decodeJson() {
             let jsonUrlString = "https://cat-fact.herokuapp.com/facts"
