@@ -11,24 +11,30 @@ import UIKit
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Outlets
-    @IBOutlet weak var emailTextFieldOutlet: UITextField!
-    @IBOutlet weak var passwordTextFieldOutlet: UITextField!
-    @IBOutlet weak var confirmPassTextFieldOutlet: UITextField!
+    @IBOutlet weak var regMailTextField: UITextField!
     @IBOutlet weak var registerButtonOutlet: UIButton!
+    @IBOutlet weak var regPassTextField: UITextField!
+    @IBOutlet weak var regConfirmPassTextField: UITextField!
     
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        notifications()
-        
-        emailTextFieldOutlet.delegate = self
-        passwordTextFieldOutlet.delegate = self
-        confirmPassTextFieldOutlet.delegate = self
+        regMailTextField.delegate = self
+        regPassTextField.delegate = self
+        regConfirmPassTextField.delegate = self
         
         SetUpOutlets()
+        notifications1()
     }
     
-    func notifications() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            dismissKeyboard()
+        }
+    }
+    
+    func notifications1() {
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -46,12 +52,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     //Move view UP when keyboard appears
     @objc func keyboardWillShowNotification(_ notification: NSNotification) {
-        moveTextField( -200, up: true)
+        moveTextField( -100, up: true)
     }
     
     //Move view DOWN when keyboard gone
     @objc func keyboardWillHideNotification(_ notification: NSNotification) {
-        moveTextField( -200, up: false)
+        moveTextField( -100, up: false)
     }
     
     //Move view when keyboar appears
@@ -78,19 +84,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     //SetUpOutlets
     private func SetUpOutlets() {
-        emailTextFieldOutlet.layer.cornerRadius = 5
-        emailTextFieldOutlet.layer.borderWidth = 0.5
-        emailTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
+        regMailTextField.layer.cornerRadius = 5
+        regMailTextField.layer.borderWidth = 0.5
+        regMailTextField.layer.borderColor = UIColor.gray.cgColor
+        regMailTextField.textContentType = UITextContentType(rawValue: "")
         
-        passwordTextFieldOutlet.layer.cornerRadius = 5
-        passwordTextFieldOutlet.layer.borderWidth = 0.5
-        passwordTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
-        passwordTextFieldOutlet.isSecureTextEntry = true
+        regPassTextField.layer.cornerRadius = 5
+        regPassTextField.layer.borderWidth = 0.5
+        regPassTextField.layer.borderColor = UIColor.gray.cgColor
+        regPassTextField.textContentType = UITextContentType(rawValue: "")
         
-        confirmPassTextFieldOutlet.layer.cornerRadius = 5
-        confirmPassTextFieldOutlet.layer.borderWidth = 0.5
-        confirmPassTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
-        confirmPassTextFieldOutlet.isSecureTextEntry = true
+        regConfirmPassTextField.layer.cornerRadius = 5
+        regConfirmPassTextField.layer.borderWidth = 0.5
+        regConfirmPassTextField.layer.borderColor = UIColor.gray.cgColor
+        regConfirmPassTextField.textContentType = UITextContentType(rawValue: "")
         
         registerButtonOutlet.layer.cornerRadius = 5
         registerButtonOutlet.layer.borderWidth = 0.5

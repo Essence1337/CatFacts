@@ -37,7 +37,7 @@ class TableViewController: UIViewController {
     
 }
 
-    // MARK: - Extensions
+// MARK: - Extensions
 extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (DecodeJson.shared.cats?.all.count)!

@@ -45,12 +45,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     //Move view UP when keyboard appears
     @objc func keyboardWillShowNotification(_ notification: NSNotification) {
-        moveTextField( -250, up: true)
+        moveTextField( -100, up: true)
     }
     
     //Move view DOWN when keyboard gone
     @objc func keyboardWillHideNotification(_ notification: NSNotification) {
-        moveTextField( -250, up: false)
+        moveTextField( -100, up: false)
     }
     
     //Move view when keyboar appears
@@ -76,15 +76,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     //SetUpOutlets
-    private func SetUpOutlets() {
+    func SetUpOutlets() {
         emailTextFieldOutlet.layer.cornerRadius = 5
         emailTextFieldOutlet.layer.borderWidth = 0.5
         emailTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
+        emailTextFieldOutlet.textContentType = UITextContentType(rawValue: "")
         
         passwordTextFieldOutlet.layer.cornerRadius = 5
         passwordTextFieldOutlet.layer.borderWidth = 0.5
         passwordTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
         passwordTextFieldOutlet.isSecureTextEntry = true
+        passwordTextFieldOutlet.textContentType = UITextContentType(rawValue: "")
+        
         
         logInButtonOutlet.layer.cornerRadius = 5
         logInButtonOutlet.layer.borderWidth = 0.5
