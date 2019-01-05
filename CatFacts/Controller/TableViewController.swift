@@ -10,14 +10,17 @@ import UIKit
 
 class TableViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var tableViewOutlet: UITableView!
     @IBOutlet weak var navBarItemOutlet: UINavigationItem!
     @IBOutlet weak var logoutButtonOutlet: UIBarButtonItem!
     
+    // MARK: - Properties
     let identifire = "customCell"
     var first: String = ""
     var last: String = ""
     
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewOutlet.delegate = self
@@ -27,14 +30,14 @@ class TableViewController: UIViewController {
         tableViewOutlet.rowHeight = UITableView.automaticDimension
     }
     
+    // MARK: - Actions
     @IBAction func logoutButtonAction(_ sender: Any) {
         
     }
     
 }
 
-
-
+    // MARK: - Extensions
 extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (DecodeJson.shared.cats?.all.count)!

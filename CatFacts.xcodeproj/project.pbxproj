@@ -45,6 +45,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D906E24C21E0F96E00C8FE00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D9F557DD21DF930800B14AB0 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +71,7 @@
 		D9F557E821DF930800B14AB0 /* CatFacts */ = {
 			isa = PBXGroup;
 			children = (
+				D906E24C21E0F96E00C8FE00 /* Extensions */,
 				D9F557FB21DFC2CB00B14AB0 /* Model */,
 				D9F557FC21DFC2D700B14AB0 /* View */,
 				D9F557FD21DFC2E700B14AB0 /* Controller */,

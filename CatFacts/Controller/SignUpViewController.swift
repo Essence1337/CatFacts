@@ -10,19 +10,73 @@ import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
+    // MARK: - Outlets
     @IBOutlet weak var emailTextFieldOutlet: UITextField!
     @IBOutlet weak var passwordTextFieldOutlet: UITextField!
     @IBOutlet weak var confirmPassTextFieldOutlet: UITextField!
     @IBOutlet weak var registerButtonOutlet: UIButton!
     
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        notifications()
+        
         emailTextFieldOutlet.delegate = self
         passwordTextFieldOutlet.delegate = self
         confirmPassTextFieldOutlet.delegate = self
+        
         SetUpOutlets()
     }
     
+    func notifications() {
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        let notifier1 = NotificationCenter.default
+        notifier1.addObserver(self,
+                              selector: #selector(keyboardWillShowNotification(_:)),
+                              name: UIWindow.keyboardWillShowNotification,
+                              object: nil)
+        notifier1.addObserver(self,
+                              selector: #selector(keyboardWillHideNotification(_:)),
+                              name: UIWindow.keyboardWillHideNotification,
+                              object: nil)
+    }
+    
+    //Move view UP when keyboard appears
+    @objc func keyboardWillShowNotification(_ notification: NSNotification) {
+        moveTextField( -200, up: true)
+    }
+    
+    //Move view DOWN when keyboard gone
+    @objc func keyboardWillHideNotification(_ notification: NSNotification) {
+        moveTextField( -200, up: false)
+    }
+    
+    //Move view when keyboar appears
+    func moveTextField(_ moveDistance: Int, up: Bool) {
+        let moveDuration = 0.2
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
+    // Hide Keyboard
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    //SetUpOutlets
     private func SetUpOutlets() {
         emailTextFieldOutlet.layer.cornerRadius = 5
         emailTextFieldOutlet.layer.borderWidth = 0.5
@@ -38,19 +92,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         confirmPassTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
         confirmPassTextFieldOutlet.isSecureTextEntry = true
         
-        
         registerButtonOutlet.layer.cornerRadius = 5
         registerButtonOutlet.layer.borderWidth = 0.5
         registerButtonOutlet.layer.borderColor = UIColor.gray.cgColor
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    
+    // MARK: - Actions
     @IBAction func registerButtonAction(_ sender: Any) {
+        dismissKeyboard()
     }
     
 }

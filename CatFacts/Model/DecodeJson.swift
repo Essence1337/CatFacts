@@ -21,7 +21,7 @@ class DecodeJson {
                 guard let data = data else { return }
                 do {
                     self.cats = try? JSONDecoder().decode(Cats.self, from: data)
-                    print(self.cats!)
+                    //print(self.cats!)
                 }
             }.resume()
     }
