@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var emailTextFieldOutlet: UITextField!
     @IBOutlet weak var passwordTextFieldOutlet: UITextField!
     @IBOutlet weak var confirmPassTextFieldOutlet: UITextField!
@@ -22,8 +22,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         confirmPassTextFieldOutlet.delegate = self
         SetUpOutlets()
     }
-
-    func SetUpOutlets() {
+    
+    private func SetUpOutlets() {
         emailTextFieldOutlet.layer.cornerRadius = 5
         emailTextFieldOutlet.layer.borderWidth = 0.5
         emailTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
@@ -37,7 +37,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         confirmPassTextFieldOutlet.layer.borderWidth = 0.5
         confirmPassTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
         confirmPassTextFieldOutlet.isSecureTextEntry = true
-
+        
         
         registerButtonOutlet.layer.cornerRadius = 5
         registerButtonOutlet.layer.borderWidth = 0.5
@@ -48,7 +48,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
+    
     
     @IBAction func registerButtonAction(_ sender: Any) {
     }

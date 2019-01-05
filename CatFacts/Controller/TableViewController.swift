@@ -9,24 +9,31 @@
 import UIKit
 
 class TableViewController: UIViewController {
-
+    
     @IBOutlet weak var tableViewOutlet: UITableView!
     @IBOutlet weak var navBarItemOutlet: UINavigationItem!
     @IBOutlet weak var logoutButtonOutlet: UIBarButtonItem!
     
     let identifire = "customCell"
+    var first: String = ""
+    var last: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewOutlet.delegate = self
         tableViewOutlet.dataSource = self
+        
+        tableViewOutlet.estimatedRowHeight = 68.0
+        tableViewOutlet.rowHeight = UITableView.automaticDimension
     }
     
     @IBAction func logoutButtonAction(_ sender: Any) {
-    
+        
     }
-   
+    
 }
+
+
 
 extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,7 +43,16 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewOutlet.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
         
-        cell.textLabel?.text = DecodeJson.shared.cats?.all[indexPath.row].user?.name.first
+        
+        if  let firstName = DecodeJson.shared.cats?.all[indexPath.row].user?.name.first {
+            first = firstName
+        }
+        
+        if let lastName = DecodeJson.shared.cats?.all[indexPath.row].user?.name.last {
+            last = lastName
+        }
+        
+        cell.textLabel?.text = "\(first) \(last)"
         cell.detailTextLabel?.text = DecodeJson.shared.cats?.all[indexPath.row].text
         
         return cell

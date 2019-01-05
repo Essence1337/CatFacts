@@ -22,11 +22,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         emailTextFieldOutlet.delegate = self
         passwordTextFieldOutlet.delegate = self
         SetUpOutlets()
-    
+        
         
     }
     
-    func SetUpOutlets() {
+    private func SetUpOutlets() {
         emailTextFieldOutlet.layer.cornerRadius = 5
         emailTextFieldOutlet.layer.borderWidth = 0.5
         emailTextFieldOutlet.layer.borderColor = UIColor.gray.cgColor
