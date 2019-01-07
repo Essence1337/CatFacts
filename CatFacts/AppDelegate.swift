@@ -16,16 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.main.async {
             let start = Date()
             DecodeJson.shared.decodeJson()
             let end = Date()
             print("Parsing done, elapsing time: \(end.timeIntervalSince(start))")
-
-        }
-        
-        
-        
+        } 
         return true
     }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ValidationComponents
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -20,7 +21,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
     let realm = try! Realm()
     let alert = AlertView()
-    
+    let predicate = EmailValidationPredicate()
+
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Notifications for moving view when keyboard appears.
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -42,16 +45,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // Removing notifications.
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // Move view back when keyboard hide.
     @objc func keyboardWillHide() {
         self.view.frame.origin.y = 0
     }
     
     @objc func keyboardWillChange(notification: NSNotification) {
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if passwordTextFieldOutlet.isFirstResponder {
                 self.view.frame.origin.y = -keyboardSize.height
@@ -68,11 +72,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         def.synchronize()
     }
     
+    // Validate user.
     func validateUser() {
         
         let results = realm.objects(Users.self)
         let userEmail = emailTextFieldOutlet.text
         let userPass = passwordTextFieldOutlet.text
+        let emailFormatBool = predicate.evaluate(with: userEmail)
         var emailMatch = false
         var passMatch = false
         
@@ -82,9 +88,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             
             return
         } else {
-            // Сюда не забыть!!! проверку формата почты!!!!!!!!!
-            if (userEmail!.count < 1) {
-                alert.showAlert(view: self, title: "Incorrect input", message: "Incorrect email format!")
+            // Email validation.
+            if (!emailFormatBool) {
+                alert.showAlert(view: self, title: "Incorrect input", message: "Email format not correct!")
                 
                 return
             }

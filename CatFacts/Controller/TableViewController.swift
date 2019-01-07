@@ -20,6 +20,13 @@ class TableViewController: UIViewController {
     var first: String = ""
     var last: String = ""
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(TableViewController.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.gray
+        return refreshControl
+    }()
+    
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,19 @@ class TableViewController: UIViewController {
         tableViewOutlet.dataSource = self
         tableViewOutlet.estimatedRowHeight = 68.0
         tableViewOutlet.rowHeight = UITableView.automaticDimension
+        
+        tableViewOutlet.refreshControl = refreshControl
+        tableViewOutlet.addSubview(self.refreshControl)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableViewOutlet.reloadData()
+    }
+    
+    // Refresh tableView on Pull-Up.
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        tableViewOutlet.reloadData()
+        refreshControl.endRefreshing()
     }
     
     // Save authorize state.
