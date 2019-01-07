@@ -47,6 +47,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         if (userEmail!.isEmpty) {
             print("Type Email!")
+            moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Enter Email!")
             
             return
@@ -54,6 +55,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             // Сюда не забыть!!! проверку формата почты
             if (userEmail!.count < 1) {
                 print("Incorrect email")
+                moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Incorrect email format!")
                 
                 return
@@ -62,12 +64,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         if (userPass!.isEmpty) {
             print("Type Pass!")
+            moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Enter password!")
             
             return
         } else {
             if (userPass!.count < 6) {
                 print("PASS SHOULD BE >5 CHARACTERS")
+                moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Password shoud be more than 5 characters!")
                 
                 return
@@ -93,18 +97,20 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 performSegue(withIdentifier: "goToTableFromLogIn", sender: self)
             } else {
                 print("Wrong password!")
+                moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Wrong password!")
                 
                 return
             }
         } else {
             print("Wrong email!")
+            moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Wrong email!")
             
             return
         }
         
-        print("SUCCES")
+        print("SUCCESS")
         
     }
     

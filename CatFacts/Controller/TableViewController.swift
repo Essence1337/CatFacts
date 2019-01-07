@@ -39,6 +39,7 @@ class TableViewController: UIViewController {
 
 // MARK: - Extensions
 extension TableViewController: UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (DecodeJson.shared.cats?.all.count)!
     }
@@ -46,18 +47,19 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewOutlet.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
         
-        
+        DispatchQueue.global(qos: .userInteractive).async {
         if  let firstName = DecodeJson.shared.cats?.all[indexPath.row].user?.name.first {
-            first = firstName
+            self.first = firstName
         }
         
         if let lastName = DecodeJson.shared.cats?.all[indexPath.row].user?.name.last {
-            last = lastName
+            self.last = lastName
         }
-        
-        cell.textLabel?.text = "\(first) \(last)"
-        cell.detailTextLabel?.text = DecodeJson.shared.cats?.all[indexPath.row].text
-        
+            DispatchQueue.main.async {
+                cell.textLabel?.text = "\(self.first) \(self.last)"
+                cell.detailTextLabel?.text = DecodeJson.shared.cats?.all[indexPath.row].text
+            }
+        }
         return cell
     }
     

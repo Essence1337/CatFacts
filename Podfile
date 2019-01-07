@@ -7,4 +7,5 @@ target 'CatFacts' do
 
   # Pods for CatFacts
 	pod 'RealmSwift'
+	pod 'ValidationComponents'
 end

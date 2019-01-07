@@ -10,6 +10,7 @@
 
 import UIKit
 import RealmSwift
+import ValidationComponents
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
@@ -22,6 +23,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
     let realm = try! Realm()
     let alert = AlertView()
+    let predicate = EmailValidationPredicate()
     
     // MARK: - Functions
     override func viewDidLoad() {
@@ -42,38 +44,61 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let userPass = regPassTextField.text
         let userPassConfirm = regConfirmPassTextField.text
         
-        if (userPass != userPassConfirm) {
-            print("PASSWORDS NOT MATCHING")
-            alert.showAlert(view: self, title: "Incorrect input", message: "Passwords are not the same!")
+        let emailFormatBool = predicate.evaluate(with: userEmail)
+        
+        // Email validation.
+        if (!emailFormatBool) {
+            print("Email format not correct")
+            moveTextField( -100, up: true)
+            alert.showAlert(view: self, title: "Incorrect input", message: "Email format not correct!")
             
             return
         }
         
-        if (userPass!.isEmpty || userPassConfirm!.isEmpty) {
-            print("U NEED TO TYPE PASS")
-            alert.showAlert(view: self, title: "Incorrect input", message: "Enter Password")
-
-            
-            return
-        } else {
-            if (userPass!.count < 6) {
-                print("PASS SHOULD BE >5 CHARACTERS")
-                return
-            }
-        }
-        
+        // Unique user check.
         for i in 0..<results.count {
-            //print(results[i].email!)
             if (results[i].email == regMailTextField.text){
                 print("USER ALLREADY EXIST")
-                
+                moveTextField( -100, up: true)
+                alert.showAlert(view: self, title: "Incorrect input", message: "User already exist!")
+
                 return
             } else {
                 print("EMAIL IS UNIQUE")
             }
         }
         
-        print("UNDER IF STATE")
+        // Password isEmpty check.
+        if (userPass!.isEmpty || userPassConfirm!.isEmpty) {
+            print("U NEED TO TYPE PASS")
+            moveTextField( -100, up: true)
+            alert.showAlert(view: self, title: "Incorrect input", message: "Enter Password")
+            
+            return
+        } else {
+            // Password length check.
+            if (userPass!.count < 6) {
+                print("Password shoud be more than 5 characters!")
+                moveTextField( -100, up: true)
+                alert.showAlert(view: self, title: "Incorrect input", message: "Password shoud be more than 5 characters!")
+                
+                return
+            }
+        }
+        
+        // Passwords match check.
+        if (userPass != userPassConfirm) {
+            print("PASSWORDS NOT MATCHING")
+            moveTextField( -100, up: true)
+            alert.showAlert(view: self, title: "Incorrect input", message: "Passwords are not the same!")
+            
+            return
+        } else {
+            print("Successfuly loged In!")
+            performSegue(withIdentifier: "goToTableFromSignUp", sender: self)
+        }
+        
+        print("SUCCESS")
         
         myUsers.email = userEmail
         myUsers.password = userPass
@@ -86,7 +111,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Actions
     @IBAction func registerButtonAction(_ sender: Any) {
         dismissKeyboard()
-        performSegue(withIdentifier: "goToTableFromSignUp", sender: self)
+        writeToDB()
     }
 
     
