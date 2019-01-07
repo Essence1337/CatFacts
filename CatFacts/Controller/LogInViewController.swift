@@ -26,13 +26,37 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.setHidesBackButton(true, animated: false)
         emailTextFieldOutlet.delegate = self
         passwordTextFieldOutlet.delegate = self
         SetUpOutlets()
         notifications()
+        print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
         
-        //        print(Realm.Configuration.defaultConfiguration.fileURL)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.checkAuthorize()
+        }
+    }
+    
+    // Check if user is allready authorized.
+    func checkAuthorize() {
+        let def = UserDefaults.standard
+        let is_authenticated = def.bool(forKey: "isLoggedIn")
+        
+        if is_authenticated {
+            performSegue(withIdentifier: "goToTableFromLogIn", sender: self)
+        } else {
+            return
+        }
+    }
+    
+    // Save authorize state.
+    func saveLoggedState() {
+        
+        let def = UserDefaults.standard
+        def.set(true, forKey: "isLoggedIn")
+        def.synchronize()
+        
     }
     
     func validateUser() {
@@ -95,6 +119,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             if (passMatch) {
                 print("Pass right!")
                 performSegue(withIdentifier: "goToTableFromLogIn", sender: self)
+                saveLoggedState()
             } else {
                 print("Wrong password!")
                 moveTextField( -100, up: true)
@@ -123,7 +148,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @IBAction func goToSignUpButtonAction(_ sender: Any) {
         dismissKeyboard()
     }
-    
     
     
     
@@ -167,17 +191,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                              object: nil)
     }
     
-    //Move view UP when keyboard appears
+    //Move view UP when keyboard appears.
     @objc func keyboardWillShowNotification(_ notification: NSNotification) {
         moveTextField( -100, up: true)
     }
     
-    //Move view DOWN when keyboard gone
+    //Move view DOWN when keyboard gone.
     @objc func keyboardWillHideNotification(_ notification: NSNotification) {
         moveTextField( -100, up: false)
     }
     
-    //Move view when keyboar appears
+    //Move view when keyboar appears.
     func moveTextField(_ moveDistance: Int, up: Bool) {
         let moveDuration = 0.2
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
@@ -188,12 +212,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         UIView.commitAnimations()
     }
     
-    // Hide Keyboard
+    // Hide Keyboard.
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    // Hide the keyboard when the return key pressed
+    // Hide the keyboard when the return key pressed.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

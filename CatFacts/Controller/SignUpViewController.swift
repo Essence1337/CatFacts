@@ -95,6 +95,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             return
         } else {
             print("Successfuly loged In!")
+            saveLoggedState()
             performSegue(withIdentifier: "goToTableFromSignUp", sender: self)
         }
         
@@ -106,6 +107,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         try! realm.write {
             realm.add(myUsers)
         }
+    }
+    
+    // Save authorize state.
+    func saveLoggedState() {
+        let def = UserDefaults.standard
+        def.set(true, forKey: "isLoggedIn")
+        def.synchronize()
     }
     
     // MARK: - Actions

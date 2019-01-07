@@ -21,7 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DecodeJson.shared.decodeJson()
             let end = Date()
             print("Parsing done, elapsing time: \(end.timeIntervalSince(start))")
+
         }
+        
+        
+        
         return true
     }
 

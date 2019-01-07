@@ -256,6 +256,7 @@
                         <outlet property="logoutButtonOutlet" destination="BSv-Sj-kmT" id="C5q-9s-0DV"/>
                         <outlet property="navBarItemOutlet" destination="CXI-0A-RHS" id="CrL-Wu-Se1"/>
                         <outlet property="tableViewOutlet" destination="rTs-VV-IFQ" id="H6m-Y7-x1V"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueToLoginScreen" id="5gx-Ow-hBx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O8H-cM-u7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -278,7 +279,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hqm-4K-e4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
+            <point key="canvasLocation" x="10" y="27"/>
         </scene>
     </scenes>
     <resources>
@@ -287,6 +288,7 @@
         <image name="cat4" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HHo-hm-PIm"/>
+        <segue reference="9pD-Ek-I0l"/>
+        <segue reference="prk-x0-rTM"/>
     </inferredMetricsTieBreakers>
 </document>

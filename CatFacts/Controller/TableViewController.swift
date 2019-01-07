@@ -23,16 +23,28 @@ class TableViewController: UIViewController {
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: false)
         tableViewOutlet.delegate = self
         tableViewOutlet.dataSource = self
         
         tableViewOutlet.estimatedRowHeight = 68.0
         tableViewOutlet.rowHeight = UITableView.automaticDimension
+        
+    }
+    
+    // Save authorize state.
+    func saveLoggedState() {
+        
+        let def = UserDefaults.standard
+        def.set(false, forKey: "isLoggedIn")
+        def.synchronize()
+        
     }
     
     // MARK: - Actions
     @IBAction func logoutButtonAction(_ sender: Any) {
-        
+        saveLoggedState()
+        performSegue(withIdentifier: "segueToLoginScreen", sender: self)
     }
     
 }
