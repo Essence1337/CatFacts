@@ -26,19 +26,15 @@ class TableViewController: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: false)
         tableViewOutlet.delegate = self
         tableViewOutlet.dataSource = self
-        
         tableViewOutlet.estimatedRowHeight = 68.0
         tableViewOutlet.rowHeight = UITableView.automaticDimension
-        
     }
     
     // Save authorize state.
     func saveLoggedState() {
-        
         let def = UserDefaults.standard
         def.set(false, forKey: "isLoggedIn")
         def.synchronize()
-        
     }
     
     // MARK: - Actions
@@ -53,13 +49,17 @@ class TableViewController: UIViewController {
 extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (DecodeJson.shared.cats?.all.count)!
+        
+        var numberOfRows = 0
+        if let unwrapped = DecodeJson.shared.cats?.all.count {
+            numberOfRows = unwrapped
+        }
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewOutlet.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
         
-        DispatchQueue.global(qos: .userInteractive).async {
         if  let firstName = DecodeJson.shared.cats?.all[indexPath.row].user?.name.first {
             self.first = firstName
         }
@@ -67,11 +67,10 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource{
         if let lastName = DecodeJson.shared.cats?.all[indexPath.row].user?.name.last {
             self.last = lastName
         }
-            DispatchQueue.main.async {
-                cell.textLabel?.text = "\(self.first) \(self.last)"
-                cell.detailTextLabel?.text = DecodeJson.shared.cats?.all[indexPath.row].text
-            }
-        }
+        cell.textLabel?.text = "\(self.first) \(self.last)"
+        cell.detailTextLabel?.text = DecodeJson.shared.cats?.all[indexPath.row].text
+        
+        
         return cell
     }
     

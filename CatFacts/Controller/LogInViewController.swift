@@ -4,9 +4,7 @@
 //
 //  Created by Тимур Кошевой on 1/4/19.
 //  Copyright © 2019 Тимур Кошевой. All rights reserved.
-
-
-//MAIN
+//
 
 import UIKit
 import RealmSwift
@@ -31,54 +29,32 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTextFieldOutlet.delegate = self
         SetUpOutlets()
         notifications()
-        print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.checkAuthorize()
-        }
-    }
-    
-    // Check if user is allready authorized.
-    func checkAuthorize() {
-        let def = UserDefaults.standard
-        let is_authenticated = def.bool(forKey: "isLoggedIn")
-        
-        if is_authenticated {
-            performSegue(withIdentifier: "goToTableFromLogIn", sender: self)
-        } else {
-            return
-        }
     }
     
     // Save authorize state.
     func saveLoggedState() {
-        
         let def = UserDefaults.standard
         def.set(true, forKey: "isLoggedIn")
         def.synchronize()
-        
     }
     
     func validateUser() {
         
         let results = realm.objects(Users.self)
-        print("Results count: \(results.count)")
-        
         let userEmail = emailTextFieldOutlet.text
         let userPass = passwordTextFieldOutlet.text
         var emailMatch = false
         var passMatch = false
         
+        // Email isEmpty check.
         if (userEmail!.isEmpty) {
-            print("Type Email!")
             moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Enter Email!")
             
             return
         } else {
-            // Сюда не забыть!!! проверку формата почты
+            // Сюда не забыть!!! проверку формата почты!!!!!!!!!
             if (userEmail!.count < 1) {
-                print("Incorrect email")
                 moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Incorrect email format!")
                 
@@ -86,57 +62,51 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        // Password isEmpty check.
         if (userPass!.isEmpty) {
-            print("Type Pass!")
             moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Enter password!")
             
             return
         } else {
+            // Password length check.
             if (userPass!.count < 6) {
-                print("PASS SHOULD BE >5 CHARACTERS")
                 moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Password shoud be more than 5 characters!")
                 
                 return
             }
         }
-        
+        // Email and password match.
         for i in 0..<results.count {
             if (results[i].email == userEmail){
                 emailMatch = true
-                print("Email match: \(emailMatch)")
                 
                 if (results[i].password == userPass) {
                     passMatch = true
-                    print("Pass match: \(passMatch)")
                 }
             }
         }
         
         if (emailMatch) {
-            print("Email right!")
             if (passMatch) {
-                print("Pass right!")
+                // Email and password correct.
                 performSegue(withIdentifier: "goToTableFromLogIn", sender: self)
                 saveLoggedState()
             } else {
-                print("Wrong password!")
+                // Password is wrong.
                 moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Wrong password!")
                 
                 return
             }
         } else {
-            print("Wrong email!")
+            // Email is wrong.
             moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Wrong email!")
             
             return
         }
-        
-        print("SUCCESS")
-        
     }
     
     // MARK: - Actions
@@ -149,13 +119,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         dismissKeyboard()
     }
     
-    
-    
-    
-    
-    
-    
-    // MARK: - --------------------------------------------------------------
     //SetUpOutlets
     func SetUpOutlets() {
         emailTextFieldOutlet.layer.cornerRadius = 5

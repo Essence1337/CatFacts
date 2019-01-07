@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D9AAF50621E38A13004E85CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50521E38A12004E85CE /* Users.swift */; };
 		D9AAF50A21E396BE004E85CE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50921E396BD004E85CE /* AlertView.swift */; };
+		D9AAF50C21E3D7D0004E85CE /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50B21E3D7D0004E85CE /* InitialViewController.swift */; };
 		D9F557EA21DF930800B14AB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F557E921DF930800B14AB0 /* AppDelegate.swift */; };
 		D9F557EF21DF930800B14AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F557ED21DF930800B14AB0 /* Main.storyboard */; };
 		D9F557F121DF930900B14AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F557F021DF930900B14AB0 /* Assets.xcassets */; };
@@ -18,7 +19,6 @@
 		D9F5580321DFEF7A00B14AB0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F5580221DFEF7A00B14AB0 /* LogInViewController.swift */; };
 		D9F5580721DFF73E00B14AB0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F5580621DFF73E00B14AB0 /* SignUpViewController.swift */; };
 		D9F5580921DFF99400B14AB0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F5580821DFF99400B14AB0 /* TableViewController.swift */; };
-		D9F5580B21DFFB7300B14AB0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F5580A21DFFB7300B14AB0 /* TableViewCell.swift */; };
 		EDB0D17BBB1E75912721CE36 /* Pods_CatFacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953EC24784544F6947B221D3 /* Pods_CatFacts.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +27,7 @@
 		953EC24784544F6947B221D3 /* Pods_CatFacts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatFacts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9AAF50521E38A12004E85CE /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		D9AAF50921E396BD004E85CE /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		D9AAF50B21E3D7D0004E85CE /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D9F557E621DF930800B14AB0 /* CatFacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatFacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F557E921DF930800B14AB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F557EE21DF930800B14AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		D9F5580221DFEF7A00B14AB0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		D9F5580621DFF73E00B14AB0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D9F5580821DFF99400B14AB0 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		D9F5580A21DFFB7300B14AB0 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		F2F1BA84E16F01B0A7817E25 /* Pods-CatFacts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatFacts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CatFacts/Pods-CatFacts.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				D9F557ED21DF930800B14AB0 /* Main.storyboard */,
-				D9F5580A21DFFB7300B14AB0 /* TableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,6 +136,7 @@
 				D9F5580221DFEF7A00B14AB0 /* LogInViewController.swift */,
 				D9F5580621DFF73E00B14AB0 /* SignUpViewController.swift */,
 				D9F5580821DFF99400B14AB0 /* TableViewController.swift */,
+				D9AAF50B21E3D7D0004E85CE /* InitialViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -262,11 +262,11 @@
 				D9AAF50621E38A13004E85CE /* Users.swift in Sources */,
 				D9F557FF21DFC33000B14AB0 /* Cats.swift in Sources */,
 				D9AAF50A21E396BE004E85CE /* AlertView.swift in Sources */,
+				D9AAF50C21E3D7D0004E85CE /* InitialViewController.swift in Sources */,
 				D9F5580921DFF99400B14AB0 /* TableViewController.swift in Sources */,
 				D9F5580121DFC85100B14AB0 /* DecodeJson.swift in Sources */,
 				D9F5580321DFEF7A00B14AB0 /* LogInViewController.swift in Sources */,
 				D9F557EA21DF930800B14AB0 /* AppDelegate.swift in Sources */,
-				D9F5580B21DFFB7300B14AB0 /* TableViewCell.swift in Sources */,
 				D9F5580721DFF73E00B14AB0 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,7 +417,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9FL6Z93F8;
 				INFOPLIST_FILE = CatFacts/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.timur.CatFacts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -433,7 +436,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9FL6Z93F8;
 				INFOPLIST_FILE = CatFacts/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.timur.CatFacts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

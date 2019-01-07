@@ -100,6 +100,39 @@
             </objects>
             <point key="canvasLocation" x="992.79999999999995" y="26.53673163418291"/>
         </scene>
+        <!--Initial View Controller-->
+        <scene sceneID="3hi-Rr-Giv">
+            <objects>
+                <viewController id="hpA-4K-SQq" customClass="InitialViewController" customModule="CatFacts" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3yv-8P-ywa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="asL-dl-4nd">
+                                <rect key="frame" x="87.5" y="232" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="HwP-SL-yUz"/>
+                                    <constraint firstAttribute="width" constant="200" id="L4l-aH-hWp"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yjn-Sq-1lO" firstAttribute="bottom" secondItem="asL-dl-4nd" secondAttribute="bottom" constant="235" id="jJ0-FO-sTR"/>
+                            <constraint firstItem="asL-dl-4nd" firstAttribute="centerX" secondItem="yjn-Sq-1lO" secondAttribute="centerX" id="jig-Sp-z4a"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yjn-Sq-1lO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Zfn-Ir-Rkw"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="fromInitialToLogIn" id="x1m-CA-o4F"/>
+                        <segue destination="sNW-6i-WDH" kind="show" identifier="fromInitialToTable" id="Uy6-X0-KBF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oZP-Eg-Jzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="194.40000000000001" y="26.53673163418291"/>
+        </scene>
         <!--Sign Up-->
         <scene sceneID="p4l-UE-dbM">
             <objects>
@@ -274,21 +307,22 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="prk-x0-rTM"/>
+                        <segue destination="hpA-4K-SQq" kind="relationship" relationship="rootViewController" id="mpm-dz-9OD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hqm-4K-e4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10" y="27"/>
+            <point key="canvasLocation" x="-591" y="27"/>
         </scene>
     </scenes>
     <resources>
         <image name="cat" width="96" height="96"/>
         <image name="cat2" width="96" height="96"/>
         <image name="cat4" width="50" height="50"/>
+        <image name="catLaunch" width="96" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9pD-Ek-I0l"/>
-        <segue reference="prk-x0-rTM"/>
+        <segue reference="Uy6-X0-KBF"/>
+        <segue reference="x1m-CA-o4F"/>
     </inferredMetricsTieBreakers>
 </document>
