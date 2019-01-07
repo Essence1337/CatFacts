@@ -127,7 +127,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         dismissKeyboard()
     }
     
-    //SetUpOutlets
+    // SetUpOutlets
     func SetUpOutlets() {
         emailTextFieldOutlet.layer.cornerRadius = 5
         emailTextFieldOutlet.layer.borderWidth = 0.5

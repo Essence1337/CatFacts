@@ -163,7 +163,7 @@
                                     <constraint firstAttribute="height" constant="200" id="soQ-g2-aCk"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm pass" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igk-9d-uG2">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igk-9d-uG2">
                                 <rect key="frame" x="77.5" y="409" width="220" height="40"/>
                                 <color key="backgroundColor" red="0.97396045923233032" green="0.85349875688552856" blue="0.71358376741409302" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -174,7 +174,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="pass" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dA-ca-jaK">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dA-ca-jaK">
                                 <rect key="frame" x="77.5" y="361" width="220" height="40"/>
                                 <color key="backgroundColor" red="0.97396045923233032" green="0.85349875688552856" blue="0.71358376741409302" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -322,7 +322,7 @@
         <image name="catLaunch" width="96" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uy6-X0-KBF"/>
+        <segue reference="HHo-hm-PIm"/>
         <segue reference="x1m-CA-o4F"/>
     </inferredMetricsTieBreakers>
 </document>

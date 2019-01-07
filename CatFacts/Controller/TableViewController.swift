@@ -46,9 +46,7 @@ class TableViewController: UIViewController {
     }
     
     func checkInternetConnection() {
-        if CheckInternet.Connection(){
-    
-        }else{
+        if !CheckInternet.Connection(){
             alert.showAlert(view: self, title: "No internet connection!", message: "Swipe down to reload data.")
         }
     }
@@ -75,7 +73,7 @@ class TableViewController: UIViewController {
     
 }
 
-// MARK: - Extensions
+    // MARK: - Extensions
 extension TableViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

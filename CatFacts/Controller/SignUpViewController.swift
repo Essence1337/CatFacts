@@ -123,7 +123,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         writeToDB()
     }
     
-    //SetUpOutlets
+    // SetUpOutlets
     private func SetUpOutlets() {
         regMailTextField.layer.cornerRadius = 5
         regMailTextField.layer.borderWidth = 0.5
