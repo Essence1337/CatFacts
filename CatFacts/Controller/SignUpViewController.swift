@@ -29,9 +29,40 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         regMailTextField.delegate = self
         regPassTextField.delegate = self
         regConfirmPassTextField.delegate = self
-        
+        dismissKeyboardOnTap()
         SetUpOutlets()
-        notifications1()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc func keyboardWillChange(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if regMailTextField.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            } else if regPassTextField.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            } else if regConfirmPassTextField.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
+        }
     }
     
     func writeToDB() {
@@ -45,7 +76,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // Email validation.
         if (!emailFormatBool) {
-            moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Email format not correct!")
             
             return
@@ -54,7 +84,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         // Unique user check.
         for i in 0..<results.count {
             if (results[i].email == regMailTextField.text){
-                moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "User already exist!")
                 
                 return
@@ -65,14 +94,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // Password isEmpty check.
         if (userPass!.isEmpty || userPassConfirm!.isEmpty) {
-            moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Enter Password")
             
             return
         } else {
             // Password length check.
             if (userPass!.count < 6) {
-                moveTextField( -100, up: true)
                 alert.showAlert(view: self, title: "Incorrect input", message: "Password shoud be more than 5 characters!")
                 
                 return
@@ -81,7 +108,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // Passwords match check.
         if (userPass != userPassConfirm) {
-            moveTextField( -100, up: true)
             alert.showAlert(view: self, title: "Incorrect input", message: "Passwords are not the same!")
             
             return
@@ -133,56 +159,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         registerButtonOutlet.layer.borderColor = UIColor.gray.cgColor
     }
     
-    func notifications1() {
-        
+    // Hide keyboard on tap.
+    func dismissKeyboardOnTap() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
-        let notifier1 = NotificationCenter.default
-        notifier1.addObserver(self,
-                              selector: #selector(keyboardWillShowNotification(_:)),
-                              name: UIWindow.keyboardWillShowNotification,
-                              object: nil)
-        notifier1.addObserver(self,
-                              selector: #selector(keyboardWillHideNotification(_:)),
-                              name: UIWindow.keyboardWillHideNotification,
-                              object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if isMovingFromParent {
-            dismissKeyboard()
-        }
-    }
-    
-    //Move view UP when keyboard appears
-    @objc func keyboardWillShowNotification(_ notification: NSNotification) {
-        moveTextField( -100, up: true)
-    }
-    
-    //Move view DOWN when keyboard gone
-    @objc func keyboardWillHideNotification(_ notification: NSNotification) {
-        moveTextField( -100, up: false)
-    }
-    
-    //Move view when keyboar appears
-    func moveTextField(_ moveDistance: Int, up: Bool) {
-        let moveDuration = 0.2
-        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(moveDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
-    }
-    
-    // Hide Keyboard
+    // Hide Keyboard.
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    // Hide the keyboard when the return key pressed
+    // Hide the keyboard when the return key pressed.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
