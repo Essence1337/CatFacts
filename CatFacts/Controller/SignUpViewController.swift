@@ -35,35 +35,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setUpNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        removeNotifications()
     }
     
-    @objc func keyboardWillHide() {
-        self.view.frame.origin.y = 0
-    }
-    
-    @objc func keyboardWillChange(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if regMailTextField.isFirstResponder {
-                self.view.frame.origin.y = -keyboardSize.height
-            } else if regPassTextField.isFirstResponder {
-                self.view.frame.origin.y = -keyboardSize.height
-            } else if regConfirmPassTextField.isFirstResponder {
-                self.view.frame.origin.y = -keyboardSize.height
-            }
-        }
-    }
     
     func writeToDB() {
         let myUsers = Users()
@@ -74,11 +53,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         let emailFormatBool = predicate.evaluate(with: userEmail)
         
-        // Email validation.
-        if (!emailFormatBool) {
-            alert.showAlert(view: self, title: "Incorrect input", message: "Email format not correct!")
+        // Email isEmpty check.
+        if (userEmail!.isEmpty) {
+            alert.showAlert(view: self, title: "Incorrect input", message: "Enter Email!")
             
             return
+        } else {
+            // Email validation.
+            if (!emailFormatBool) {
+                alert.showAlert(view: self, title: "Incorrect input", message: "Email format not correct!")
+                
+                return
+            }
         }
         
         // Unique user check.
@@ -157,6 +143,36 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         registerButtonOutlet.layer.cornerRadius = 5
         registerButtonOutlet.layer.borderWidth = 0.5
         registerButtonOutlet.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    // Notifications for moving view when keyboard appears.
+    func setUpNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // Removing notifications.
+    func removeNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc func keyboardWillChange(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if regMailTextField.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height + 100
+            } else if regPassTextField.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height + 100
+            } else if regConfirmPassTextField.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height + 100
+            }
+        }
     }
     
     // Hide keyboard on tap.

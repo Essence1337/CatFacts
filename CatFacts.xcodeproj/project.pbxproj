@@ -10,6 +10,7 @@
 		D9AAF50621E38A13004E85CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50521E38A12004E85CE /* Users.swift */; };
 		D9AAF50A21E396BE004E85CE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50921E396BD004E85CE /* AlertView.swift */; };
 		D9AAF50C21E3D7D0004E85CE /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50B21E3D7D0004E85CE /* InitialViewController.swift */; };
+		D9AAF50E21E40196004E85CE /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAF50D21E40196004E85CE /* CheckInternet.swift */; };
 		D9F557EA21DF930800B14AB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F557E921DF930800B14AB0 /* AppDelegate.swift */; };
 		D9F557EF21DF930800B14AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F557ED21DF930800B14AB0 /* Main.storyboard */; };
 		D9F557F121DF930900B14AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F557F021DF930900B14AB0 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		D9AAF50521E38A12004E85CE /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		D9AAF50921E396BD004E85CE /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		D9AAF50B21E3D7D0004E85CE /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		D9AAF50D21E40196004E85CE /* CheckInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 		D9F557E621DF930800B14AB0 /* CatFacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatFacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F557E921DF930800B14AB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F557EE21DF930800B14AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				D9AAF50921E396BD004E85CE /* AlertView.swift */,
+				D9AAF50D21E40196004E85CE /* CheckInternet.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				D9F5580321DFEF7A00B14AB0 /* LogInViewController.swift in Sources */,
 				D9F557EA21DF930800B14AB0 /* AppDelegate.swift in Sources */,
 				D9F5580721DFF73E00B14AB0 /* SignUpViewController.swift in Sources */,
+				D9AAF50E21E40196004E85CE /* CheckInternet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

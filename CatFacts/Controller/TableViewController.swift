@@ -19,6 +19,7 @@ class TableViewController: UIViewController {
     let identifire = "customCell"
     var first: String = ""
     var last: String = ""
+    let alert = AlertView()
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -35,7 +36,7 @@ class TableViewController: UIViewController {
         tableViewOutlet.dataSource = self
         tableViewOutlet.estimatedRowHeight = 68.0
         tableViewOutlet.rowHeight = UITableView.automaticDimension
-        
+        checkInternetConnection()
         tableViewOutlet.refreshControl = refreshControl
         tableViewOutlet.addSubview(self.refreshControl)
     }
@@ -44,8 +45,17 @@ class TableViewController: UIViewController {
         tableViewOutlet.reloadData()
     }
     
+    func checkInternetConnection() {
+        if CheckInternet.Connection(){
+    
+        }else{
+            alert.showAlert(view: self, title: "No internet connection!", message: "Swipe down to reload data.")
+        }
+    }
+    
     // Refresh tableView on Pull-Up.
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        DecodeJson.shared.decodeJson()
         tableViewOutlet.reloadData()
         refreshControl.endRefreshing()
     }

@@ -35,41 +35,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Notifications for moving view when keyboard appears.
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setUpNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Removing notifications.
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    // Move view back when keyboard hide.
-    @objc func keyboardWillHide() {
-        self.view.frame.origin.y = 0
-    }
-    
-    @objc func keyboardWillChange(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if passwordTextFieldOutlet.isFirstResponder {
-                self.view.frame.origin.y = -keyboardSize.height
-            } else if emailTextFieldOutlet.isFirstResponder {
-                self.view.frame.origin.y = -keyboardSize.height
-            }
-        }
-    }
-    
-    // Save authorize state.
-    func saveLoggedState() {
-        let def = UserDefaults.standard
-        def.set(true, forKey: "isLoggedIn")
-        def.synchronize()
+        removeNotifications()
     }
     
     // Validate user.
@@ -139,6 +110,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // Save authorize state.
+    func saveLoggedState() {
+        let def = UserDefaults.standard
+        def.set(true, forKey: "isLoggedIn")
+        def.synchronize()
+    }
+    
     // MARK: - Actions
     @IBAction func logInButtonAction(_ sender: Any) {
         dismissKeyboard()
@@ -166,6 +144,34 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         logInButtonOutlet.layer.cornerRadius = 5
         logInButtonOutlet.layer.borderWidth = 0.5
         logInButtonOutlet.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    // Notifications for moving view when keyboard appears.
+    func setUpNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // Removing notifications.
+    func removeNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // Move view back when keyboard hide.
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc func keyboardWillChange(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if passwordTextFieldOutlet.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height + 100
+            } else if emailTextFieldOutlet.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height + 100
+            }
+        }
     }
     
     // Hide keyboard on tap.
