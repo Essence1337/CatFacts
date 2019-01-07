@@ -48,7 +48,6 @@
                                 </state>
                                 <connections>
                                     <action selector="logInButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AbV-Lp-kRq"/>
-                                    <segue destination="sNW-6i-WDH" kind="show" id="Agg-C6-G7f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LW0-yV-v09">
@@ -94,6 +93,7 @@
                         <outlet property="goToSignUpButtonOutlet" destination="LW0-yV-v09" id="yEG-zU-hgg"/>
                         <outlet property="logInButtonOutlet" destination="NtY-NK-vmF" id="iXt-Yw-pz6"/>
                         <outlet property="passwordTextFieldOutlet" destination="8bL-7M-wry" id="Z4x-8x-itN"/>
+                        <segue destination="sNW-6i-WDH" kind="show" identifier="goToTableFromLogIn" id="9pD-Ek-I0l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -121,7 +121,6 @@
                                 <connections>
                                     <action selector="logInButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PZe-3H-6jv"/>
                                     <action selector="registerButtonAction:" destination="CBR-Gr-u01" eventType="touchUpInside" id="ybN-JK-hwT"/>
-                                    <segue destination="sNW-6i-WDH" kind="show" id="xcC-gp-UNZ"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat2" translatesAutoresizingMaskIntoConstraints="NO" id="qci-yJ-h3a">
@@ -186,6 +185,7 @@
                         <outlet property="regMailTextField" destination="fMm-YB-N52" id="gDj-5g-gVF"/>
                         <outlet property="regPassTextField" destination="5dA-ca-jaK" id="Wst-qa-Unb"/>
                         <outlet property="registerButtonOutlet" destination="7Je-Pa-aex" id="TqC-G9-ilO"/>
+                        <segue destination="sNW-6i-WDH" kind="show" identifier="goToTableFromSignUp" id="HHo-hm-PIm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAd-Nz-FYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,6 +287,6 @@
         <image name="cat4" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xcC-gp-UNZ"/>
+        <segue reference="HHo-hm-PIm"/>
     </inferredMetricsTieBreakers>
 </document>
